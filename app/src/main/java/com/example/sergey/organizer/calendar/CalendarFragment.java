@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.sergey.organizer.MainActivity;
 import com.example.sergey.organizer.R;
-import com.example.sergey.organizer.constants.Util;
+import com.example.sergey.organizer.util.Util;
 
 import java.util.Calendar;
 import java.util.Date;

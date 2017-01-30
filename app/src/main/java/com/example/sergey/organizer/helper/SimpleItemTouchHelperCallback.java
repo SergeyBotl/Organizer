@@ -5,8 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 
-import com.example.sergey.organizer.constants.Constants;
-
 
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
     //прозрачность перетаскиваемого итема, после перетаскивания остается таже прозрачность
@@ -26,8 +24,8 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     @Override
     public boolean isItemViewSwipeEnabled() {
-        //return true;
-        return Constants.ITEM_DELETE;
+        return true;
+       // return Constants.ITEM_DELETE;
     }
 
     @Override

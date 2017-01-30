@@ -23,6 +23,7 @@ import com.example.sergey.organizer.entity.Event;
 import com.example.sergey.organizer.helper.ItemTouchHelperAdapter;
 import com.example.sergey.organizer.helper.ItemTouchHelperViewHolder;
 import com.example.sergey.organizer.helper.OnStartDragListener;
+import com.example.sergey.organizer.util.Util;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,11 +34,7 @@ import java.util.List;
 
 public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.ItemViewHolder>
         implements ItemTouchHelperAdapter {
-
-    private SimpleDateFormat sdfDMY = new SimpleDateFormat(Constants.DATE_D_M_Y);
-    private SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
-    private SimpleDateFormat sdfDate = new SimpleDateFormat("dd EE");
-    private SimpleDateFormat sdfDateTime = new SimpleDateFormat(Constants.DATE_D_M_Y_H_M);
+    private  SimpleDateFormat dmy = new SimpleDateFormat(Constants.DATE_D_M_Y);
     private static List<Event> mItems = new ArrayList<>();
     private Context context;
     private String time, date;
@@ -48,10 +45,10 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     private String dateFilter;
 
     public RecyclerListAdapter(Context context, OnStartDragListener dragStartListener
-            , RecyclerListFragment.OnClickListener mOnClickListener, List<Event> items, String dateFilter) {//,
+            , RecyclerListFragment.OnClickListener mOnClickListener,List<Event> mItems ,String dateFilter) {//,
         mDragStartListener = dragStartListener;
         this.context = context;
-        mItems = items;
+       this.mItems = mItems;
         this.mOnClickListener = mOnClickListener;
         this.dateFilter = dateFilter;
         Log.d("tag", "RecyclerListAdapter: ");
@@ -66,12 +63,14 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, final int position) {
-        final Event event = cont.getSortedList().get(position);
+       // final Event event = cont.getSortedList().get(position);
+        final Event event = mItems.get(position);
+
         long currentDate = new Date().getTime();
-        //final Event event = mItems.get(position);
-        if (dateFilter != null && !sdfDMY.format(new Date(event.getDate())).equals(dateFilter)) {
+
+        if (dateFilter != null &&!dmy.format(new Date(event.getDate())).equals(dateFilter)) {
             holder.itemRel.setVisibility(View.GONE);
-            return;
+          return;
         }
         if (!Constants.ITEM_EVENT_DONE_CHECK && event.isCheckDone()) {
             holder.itemRel.setVisibility(View.GONE);
@@ -80,29 +79,35 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
 
         if (event.getDate() == 0) holder.textViewDate.setVisibility(View.GONE);
-        date = event.getDate() == 0 ? "" : sdfDMY.format(new Date(event.getDate()));
-        time = event.getTime() == 0 ? "" : sdfTime.format(new Date(event.getTime()));
+        date = event.getDate() == 0 ? "" : Util.getDayEE(event.getDate());
+        time = event.getTime() == 0 ? "" :"" +Util.getTime(event.getTime());
         holder.textMsg.setText(event.getMsgEvent());
+
         if (event.isCheckDone()){
-            holder.textMsg.setPaintFlags(holder.textMsg.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.textMsg.setPaintFlags( Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
+
         holder.textViewDate.setText(date + " " + time);
-        holder.chBox.setChecked(event.isCheckDone());
+       holder.chBox.setChecked(event.isCheckDone());
         if (currentDate > event.getDate()) {
             holder.textViewDate.setTextColor(context.getResources().getColor(R.color.colorAccent));
         }
-        holder.chBox.setOnClickListener(new View.OnClickListener() {
+
+        final View checkB=holder.chBox;
+         checkB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (holder.chBox.isChecked()) {
                     event.setCheckDone(true);
+                  //  holder.textMsg.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
                 } else {
                     event.setCheckDone(false);
+                    notifyDataSetChanged();
                 }
                 Log.d("tag", "holder.chBox: " + event.isCheckDone());
                 cont.updateItemEvent(event, position);
-                // notifyDataSetChanged();
+                //
             }
         });
 
@@ -170,7 +175,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             if (Constants.ITEM_SORT || Constants.ITEM_DELETE) {
                 chBox.setVisibility(View.VISIBLE);
                 handleView.setVisibility(View.VISIBLE);
-                handleViewDel.setVisibility(View.VISIBLE);
+               // handleViewDel.setVisibility(View.VISIBLE);
                 // textViewDate.setVisibility(View.GONE);
 
             }
@@ -189,5 +194,10 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             itemView.setBackgroundColor(0);
         }
     }
+    static class ViewHeader extends RecyclerView.ViewHolder{
 
+        public ViewHeader(View itemView) {
+            super(itemView);
+        }
+    }
 }

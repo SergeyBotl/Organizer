@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
 import com.example.sergey.organizer.Controller;
-import com.example.sergey.organizer.constants.Util;
+import com.example.sergey.organizer.util.Util;
 import com.example.sergey.organizer.entity.Event;
 import com.example.sergey.organizer.helper.OnStartDragListener;
 import com.example.sergey.organizer.helper.SimpleItemTouchHelperCallback;
@@ -59,14 +59,15 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         //убираю клавиатуру
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
-        eventList = contr.getSortedList();
+          //TODO
+       // eventList = contr.getSortedList();
+        eventList = contr.getList();
         dateFilter = 0;
         if (getArguments() != null) {
             dateFilter = getArguments().getLong("dateFilter", 0);
         }
 
-        Log.d("tag", "onViewCreated  getArguments() " + eventList.toString());
+        //Log.d("tag", "onViewCreated  getArguments() " + eventList.toString());
         RecyclerListAdapter adapter = new RecyclerListAdapter(getActivity(), this, mOnClickListener, eventList, Util.getDateDMY(dateFilter));
         RecyclerView recyclerView = (RecyclerView) view;
         recyclerView.setHasFixedSize(true);

@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.sergey.organizer.constants.Constants;
-import com.example.sergey.organizer.constants.Util;
+import com.example.sergey.organizer.util.Util;
 import com.example.sergey.organizer.dao.ConfigDao;
 import com.example.sergey.organizer.dao.WorkingWithFiles;
 import com.example.sergey.organizer.entity.ChooseMenu;

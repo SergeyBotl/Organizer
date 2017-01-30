@@ -11,15 +11,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textDate"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="5dp"
-
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,30 +18,37 @@
             android:layout_marginTop="3dp"
             android:orientation="horizontal">
 
+          <!--  <ImageButton
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@android:drawable/checkbox_on_background" />-->
+
             <CheckBox
                 android:id="@+id/checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:visibility="gone"/>
+                android:button="@drawable/checkbox_selector"
+                android:visibility="gone" />
 
 
             <TextView
                 android:id="@+id/textMsg"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_height="22dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="9"
                 android:gravity="center_vertical"
                 android:textSize="15dp" />
 
-            <ImageView
-                android:id="@+id/handle_del"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_weight="0.5"
-                android:scaleType="center"
-                android:src="@drawable/ic_swap_horiz_black_24dp"
-                android:visibility="gone" />
+            <!--  <ImageView
+                  android:id="@+id/handle_del"
+                  android:layout_width="wrap_content"
+                  android:layout_height="25dp"
+                  android:layout_weight="0.5"
+                  android:scaleType="center"
+                  android:src="@drawable/ic_swap_horiz_black_24dp"
+                  android:visibility="gone" />-->
 
 
             <ImageView
@@ -64,17 +62,27 @@
 
         </LinearLayout>
 
-       <!-- <TextView
-            android:id="@+id/textTime"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textDate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:textSize="9dp" />-->
-
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:paddingRight="5dp"
+            android:textSize="8dp" />
+        <!-- <TextView
+             android:id="@+id/textTime"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="40dp"
+             android:textSize="9dp" />-->
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:layout_marginTop="3dp"
             android:background="@color/colorGrey" />
+
     </LinearLayout>
+
+
 </RelativeLayout>
