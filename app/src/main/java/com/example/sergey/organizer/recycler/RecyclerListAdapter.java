@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -51,13 +50,12 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         this.mItems = mItems;
         this.mOnClickListener = mOnClickListener;
         this.dateFilter = dateFilter;
-        Log.d("tag", "RecyclerListAdapter: ");
+
     }
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, parent, false);
-        Log.d("tag", "onCreateViewHolder: ");
         return new ItemViewHolder(view);
     }
 
@@ -77,7 +75,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             return;
         }
 
-        if (event.getDate() == 0){
+        if (event.getDate() == 0) {
             holder.textViewDate.setVisibility(View.GONE);
         }
 
@@ -102,7 +100,6 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
                     event.setCheckDone(false);
                     notifyDataSetChanged();
                 }
-                Log.d("tag", "holder.chBox: " + event.isCheckDone());
                 cont.updateItemEvent(event, position);
 
 
@@ -118,7 +115,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         holder.textMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Toast.makeText(context, "setOnClickListener", Toast.LENGTH_SHORT).show();
+
                 mOnClickListener.onClickk(index);
             }
         });
@@ -180,11 +177,8 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             if (Constants.ITEM_SORT || Constants.ITEM_DELETE) {
                 chBox.setVisibility(View.VISIBLE);
                 handleView.setVisibility(View.VISIBLE);
-                // handleViewDel.setVisibility(View.VISIBLE);
-                // textViewDate.setVisibility(View.GONE);
-
             }
-            //handleView.setVisibility(Constants.ITEM_SORT ? View.VISIBLE : View.GONE);
+
         }
 
         @Override
