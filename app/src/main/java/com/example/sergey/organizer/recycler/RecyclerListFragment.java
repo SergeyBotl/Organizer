@@ -59,8 +59,8 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         //убираю клавиатуру
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-          //TODO
-       // eventList = contr.getSortedList();
+        //TODO
+        // eventList = contr.getSortedList();
         eventList = contr.getList();
         dateFilter = 0;
         if (getArguments() != null) {
@@ -73,7 +73,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        adapter.notifyDataSetChanged();
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(recyclerView);
@@ -93,6 +93,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+
     public long getDateFilter() {
         return dateFilter;
     }
