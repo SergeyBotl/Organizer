@@ -1,0 +1,70 @@
+package com.example.sergey.organizer;
+
+import android.annotation.SuppressLint;
+
+import com.example.sergey.organizer.constants.Constants;
+import com.example.sergey.organizer.dao.WorkingWithFiles;
+import com.example.sergey.organizer.entity.Event;
+
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+
+public class Controller {
+    @SuppressLint("SimpleDateFormat")
+    SimpleDateFormat sdfD = new SimpleDateFormat(Constants.DATE_D_M_Y);
+    @SuppressLint("SimpleDateFormat")
+    SimpleDateFormat sdfT = new SimpleDateFormat(Constants.DATE_H_M);
+
+    private WorkingWithFiles wwf = new WorkingWithFiles();
+
+    public Controller() {
+    }
+
+    public List<Event> getSortedList() {
+        List<Event> list = wwf.readFile();
+
+        Collections.sort(list, new Comparator<Event>() {
+            @Override
+            public int compare(Event event, Event t1) {
+
+                 if ( event.getDate() -  t1.getDate()==0)
+                     return (int) event.getTime() - (int) t1.getTime();
+                return (int) event.getDate() - (int) t1.getDate();
+
+            }
+
+        });
+        wwf.writeFile(list);
+
+        return list;
+    }
+
+    public void saveList(List<Event> list) {
+        wwf.writeFile(list);
+    }
+
+    public void saveNewEvent(Event event) {
+        List<Event> list = wwf.readFile();
+        list.add(event);
+        wwf.writeFile(list);
+    }
+
+    public void updateItemEvent(Event event, int index) {
+        List<Event> list = wwf.readFile();
+        list.set(index, event);
+        wwf.writeFile(list);
+    }
+
+    public Event fingById(long id) {
+        for (Event e : wwf.readFile()) {
+            if (e.getId() == id) {
+                return e;
+            }
+        }
+        return null;
+    }
+
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textPrevious"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/textMonth"
+        android:layout_toLeftOf="@+id/textMonth"
+        android:clickable="true"
+        android:drawableRight="@drawable/ic_keyboard_arrow_left_black_24dp"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/textMonth"
+        android:layout_width="190dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:gravity="center"
+        android:text="month"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/textNext"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/textMonth"
+        android:layout_toEndOf="@+id/textMonth"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:gravity="center" />
+
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_below="@+id/textMonth"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+
+        android:numColumns="7" />
+
+
+</RelativeLayout>

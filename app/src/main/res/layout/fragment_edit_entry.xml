@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/textViewMsgTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/what"
+        android:textColor="@color/colorBlue"
+        android:textStyle="bold|italic" />
+
+    <EditText
+        android:id="@+id/editTextMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:ems="10"
+        android:hint="msg"
+        android:inputType="textMultiLine" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="25dp"
+        android:text="Дата"
+        android:textColor="@color/colorBlue"
+        android:textStyle="bold|italic" />
+
+
+    <!-- android:layout_weight="0.17"-->
+
+    <LinearLayout
+        android:id="@+id/layout_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editTextDate_eef"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:clickable="true"
+            android:ems="10"
+            android:hint="дата" />
+
+        <ImageButton
+            android:id="@+id/image_date"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="7dp"
+            android:background="@color/colorWhite"
+            android:src="@drawable/ic_shortcut_today" />
+
+        <ImageButton
+            android:id="@+id/image_clear_date"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="7dp"
+            android:background="@color/colorWhite"
+            android:src="@drawable/ic_shortcut_highlight_off"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Время"
+            android:textColor="@color/colorBlue"
+            android:textStyle="bold|italic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextTime_eef"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:clickable="true"
+                android:focusable="false"
+                android:ems="10"
+                android:hint="время" />
+
+            <ImageButton
+                android:id="@+id/image_time"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="7dp"
+
+                android:src="@drawable/ic_shortcut_access_time" />
+
+            <ImageButton
+                android:id="@+id/image_clear_time"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="7dp"
+                android:background="@color/colorWhite"
+                android:src="@drawable/ic_shortcut_highlight_off"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+<CheckBox
+    android:id="@+id/checkboxDone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:text="@string/eef_checkBoxDone"/>
+</LinearLayout>

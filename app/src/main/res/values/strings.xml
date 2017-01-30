@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Organizer</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_calendar">Календарь</string>
+    <string name="title_list">Список дел</string>
+    <string name="title_sort">Сортировать</string>
+    <string name="title_delete">Удалить swipe в лево</string>
+    <string name="title_edit">Редактировать</string>
+  <string name="title_close_app">Закрыть приложение?</string>
+  <string name="title_new_event">Новое дело</string>
+
+    <string name="item_list">Список дел</string>
+    <string name="item_done">Выполнено</string>
+    <string name="item_sort_delete">Сорт делит</string>
+    <string name="item_add_event">Добавить события</string>
+    <string name="item_sort">Сортировать</string>
+    <string name="item_delete">Удалить</string>
+    <string name="item_save">Сохранить</string>
+    <string name="item_ok">Да</string>
+    <string name="item_no">Нет</string>
+
+    <string name="err_save_eef">Ошибка запись не создана</string>
+    <string name="what">Что должно быть сделано?</string>
+    <string name="eef_checkBoxDone">Выполненно</string>
+
+
+    <!--<string name="title_activity_main2">Main2Activity</string>-->
+    <array name="main_items">
+        <item>List - Basic Drag and Swipe</item>
+        <!-- <item>Grid - Basic Swipe</item>-->
+    </array>
+
+
+</resources>
