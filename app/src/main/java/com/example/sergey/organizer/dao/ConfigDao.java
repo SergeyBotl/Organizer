@@ -39,8 +39,8 @@ public class ConfigDao {
    listConfig.add(new Config(0, "start page", R.string.title_calendar, new CalendarFragment(), false, paramsMenu, 0));
 
         paramsMenu = new HashMap<>();
-        // paramsMenu.put(7, true);
-        paramsMenu.put(7, "");
+
+//        paramsMenu.put(7, "");
         paramsMenu.put(2, "");
         paramsMenu.put(4, "");
 

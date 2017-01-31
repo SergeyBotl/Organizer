@@ -240,8 +240,8 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setTitle(Util.getDateDMY(getRlfDateFilter()));
                 return true;
             case R.id.action_edit_sort_delete:
-                Constants.ITEM_EVENT_DONE_CHECK = true;
-                createListByFilter(getRlfDateFilter(), 7, 0);
+//                Constants.ITEM_EVENT_DONE_CHECK = true;
+//                createListByFilter(getRlfDateFilter(), 7, 0);
                 break;
             default:
                 break;

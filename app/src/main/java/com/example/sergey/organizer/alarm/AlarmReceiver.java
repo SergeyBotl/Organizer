@@ -9,7 +9,6 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.content.WakefulBroadcastReceiver;
-import android.util.Log;
 
 import com.example.sergey.organizer.MainActivity;
 import com.example.sergey.organizer.R;
@@ -20,10 +19,10 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
 
-        Log.d(TAG, "onReceiver");
+       /* Log.d(TAG, "onReceiver");
         Log.d(TAG, "action " + intent.getAction());
         Log.d(TAG, "msg" + intent.getStringExtra("msg"));
-        Log.d(TAG, "time" + intent.getStringExtra("time"));
+        Log.d(TAG, "time" + intent.getStringExtra("time"));*/
 
         Uri alarmUri = null;//= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         if (alarmUri == null) {
