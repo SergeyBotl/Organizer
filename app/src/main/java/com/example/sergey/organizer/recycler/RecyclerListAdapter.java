@@ -37,7 +37,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     private static List<Event> mItems = new ArrayList<>();
     private Context context;
     private String time, date;
-
+    RecyclerView recyclerView;
     private Controller cont = new Controller();
     private final OnStartDragListener mDragStartListener;
     private RecyclerListFragment.OnClickListener mOnClickListener;
@@ -82,12 +82,8 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         date = event.getDate() == 0 ? "" : Util.getDayEE(event.getDate());
         time = event.getTime() == 0 ? "" : "" + Util.getTime(event.getTime());
 
-        holder.textMsg.setText(event.getMsgEvent());
         holder.textViewDate.setText(date + " " + time);
         holder.chBox.setChecked(event.isCheckDone());
-        if (event.isCheckDone()) {
-            holder.textMsg.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        }
 
         final View checkB = holder.chBox;
         checkB.setOnClickListener(new View.OnClickListener() {
@@ -95,16 +91,19 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             public void onClick(View view) {
                 if (holder.chBox.isChecked()) {
                     event.setCheckDone(true);
-                    // holder.textMsg.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+                    holder.textMsg.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
                 } else {
                     event.setCheckDone(false);
-                    notifyDataSetChanged();
+                    holder.textMsg.setPaintFlags(0);
                 }
                 cont.updateItemEvent(event, position);
-
-
-            }
+       }
         });
+        holder.textMsg.setText(event.getMsgEvent());
+
+        if (event.isCheckDone()) {
+            holder.textMsg.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        }
 
         if (currentDate > event.getDate()) {
             holder.textViewDate.setTextColor(context.getResources().getColor(R.color.colorAccent));
@@ -115,7 +114,6 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         holder.textMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mOnClickListener.onClickk(index);
             }
         });
@@ -175,7 +173,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             handleView = (ImageView) itemView.findViewById(R.id.handle);
             handleViewDel = (ImageView) itemView.findViewById(R.id.handle_del);
             if (Constants.ITEM_SORT || Constants.ITEM_DELETE) {
-                chBox.setVisibility(View.VISIBLE);
+               // chBox.setVisibility(View.VISIBLE);
                 handleView.setVisibility(View.VISIBLE);
             }
 

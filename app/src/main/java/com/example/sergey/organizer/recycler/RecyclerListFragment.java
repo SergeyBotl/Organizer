@@ -66,10 +66,10 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         if (getArguments() != null) {
             dateFilter = getArguments().getLong("dateFilter", 0);
         }
-
+        RecyclerView recyclerView = (RecyclerView) view;
         //Log.d("tag", "onViewCreated  getArguments() " + eventList.toString());
         RecyclerListAdapter adapter = new RecyclerListAdapter(getActivity(), this, mOnClickListener, eventList, Util.getDateDMY(dateFilter));
-        RecyclerView recyclerView = (RecyclerView) view;
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
