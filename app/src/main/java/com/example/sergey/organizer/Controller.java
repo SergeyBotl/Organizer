@@ -52,7 +52,13 @@ public class Controller {
 
     public void updateItemEvent(Event event, int index) {
         List<Event> list = wwf.readFile();
-        list.set(index, event);
+       try{
+           list.set(index, event);
+       }catch (IndexOutOfBoundsException e){
+
+       }
+
+
         wwf.writeFile(list);
     }
 

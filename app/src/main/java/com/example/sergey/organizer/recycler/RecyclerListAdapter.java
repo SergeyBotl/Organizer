@@ -98,6 +98,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
                 }
                 cont.updateItemEvent(event, position);
        }
+
         });
         holder.textMsg.setText(event.getMsgEvent());
 

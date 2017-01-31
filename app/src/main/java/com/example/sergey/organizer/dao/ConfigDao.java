@@ -16,7 +16,7 @@ import java.util.Map;
 public class ConfigDao {
 
     private static List<Config> listConfig = new ArrayList<>();
-    //private static Map<Integer, Integer> itemMenu;
+
     private static List<ChooseMenu> itemMenu;
 
 
