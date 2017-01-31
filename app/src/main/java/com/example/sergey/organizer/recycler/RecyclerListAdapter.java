@@ -37,7 +37,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     private static List<Event> mItems = new ArrayList<>();
     private Context context;
     private String time, date;
-    RecyclerView recyclerView;
+
     private Controller cont = new Controller();
     private final OnStartDragListener mDragStartListener;
     private RecyclerListFragment.OnClickListener mOnClickListener;
@@ -79,7 +79,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             holder.textViewDate.setVisibility(View.GONE);
         }
 
-        date = event.getDate() == 0 ? "" : Util.getDayEE(event.getDate());
+        date = event.getDate() == 0 ? "" : Util.getEEDayMonth(event.getDate());
         time = event.getTime() == 0 ? "" : "" + Util.getTime(event.getTime());
 
         holder.textViewDate.setText(date + " " + time);

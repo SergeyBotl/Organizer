@@ -97,13 +97,13 @@ public class EditEntryFragment extends Fragment {
         setDate(keeperDate);
         setTime(keeperTime);
 
-        textDate.setOnClickListener(allBtn);
-        textTime.setOnClickListener(allBtn);
-        ivClearDate.setOnClickListener(allBtn);
-        ivDate.setOnClickListener(allBtn);
-        ivClearTime.setOnClickListener(allBtn);
-        ivTime.setOnClickListener(allBtn);
+        textDate.setOnClickListener(allBtnDate);
+        ivClearDate.setOnClickListener(allBtnDate);
+        ivDate.setOnClickListener(allBtnDate);
 
+        ivClearTime.setOnClickListener(allBtnTime);
+        ivTime.setOnClickListener(allBtnTime);
+        textTime.setOnClickListener(allBtnTime);
         return view;
     }
 
@@ -133,9 +133,10 @@ public class EditEntryFragment extends Fragment {
         }
     }
 
-    View.OnClickListener allBtn = new View.OnClickListener() {
+    View.OnClickListener allBtnDate = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+
             switch (view.getId()) {
                 case R.id.image_clear_date:
                     setDate(0);
@@ -146,6 +147,16 @@ public class EditEntryFragment extends Fragment {
                 case R.id.editTextDate_eef:
                     mOnClickListenerEEF.startCalendarDialog("date");
                     return;
+                 default:
+                    break;
+            }
+        }
+    };
+
+    View.OnClickListener allBtnTime = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
                 case R.id.image_clear_time:
                     setTime(0);
                     return;
@@ -200,29 +211,32 @@ public class EditEntryFragment extends Fragment {
                 , dateNew.get(Calendar.DAY_OF_MONTH)
                 , timeNew.get(Calendar.HOUR_OF_DAY)
                 , timeNew.get(Calendar.MINUTE));
+        if (time==0){
+            calendar.set(Calendar.HOUR_OF_DAY,23);
+            calendar.set(Calendar.MINUTE,59);
+            calendar.set(Calendar.SECOND,59);
+     }
+
         Log.d("tag", "" + sdfDate.format(new Date(calendar.getTimeInMillis()))
                 + "\n" + sdfTime.format(new Date(calendar.getTimeInMillis()))
                 + "\n" + sdfDateTime.format(new Date(calendar.getTimeInMillis())));
         return calendar.getTimeInMillis();
     }
 
-    public void setAlarm(long timeMillis) {//long , String textMsg
+    public void setAlarm(long timeMillis) {
         Intent intent = createIntent(String.valueOf(timeMillis), event.getMsgEvent(), sdfTime.format(new Date(timeMillis)));
         PendingIntent pIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
-        Log.d(TAG, "start");
-        am.set(AlarmManager.RTC_WAKEUP, timeMillis, pIntent);
+         am.set(AlarmManager.RTC_WAKEUP, timeMillis, pIntent);
 
     }
 
     public void cancelAlarm(long timeMillis) {
-        Log.d(LOG_TAG, "cancel");
-        Intent intent = createIntent(String.valueOf(timeMillis), null, null);
+         Intent intent = createIntent(String.valueOf(timeMillis), null, null);
         PendingIntent pIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
     }
 
     private Intent createIntent(String action, String extraMsg, String extraTime) {
-        Log.d(TAG, "createIntent " + action);
         Intent intent = new Intent(getActivity(), AlarmReceiver.class);
         intent.setAction(action);
         intent.putExtra("time", extraTime);

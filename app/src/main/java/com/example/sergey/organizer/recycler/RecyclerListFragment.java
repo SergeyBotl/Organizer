@@ -61,7 +61,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         //TODO
         // eventList = contr.getSortedList();
-        eventList = contr.getList();
+        eventList = contr.getSortedList();
         dateFilter = 0;
         if (getArguments() != null) {
             dateFilter = getArguments().getLong("dateFilter", 0);

@@ -7,31 +7,30 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.sergey.organizer.calendar.CalendarFragment;
 import com.example.sergey.organizer.constants.Constants;
-import com.example.sergey.organizer.util.Util;
 import com.example.sergey.organizer.dao.ConfigDao;
 import com.example.sergey.organizer.dao.WorkingWithFiles;
 import com.example.sergey.organizer.entity.ChooseMenu;
 import com.example.sergey.organizer.entity.Config;
-import com.example.sergey.organizer.calendar.CalendarFragment;
 import com.example.sergey.organizer.fragment.DatePickerFragment;
 import com.example.sergey.organizer.fragment.EditEntryFragment;
-import com.example.sergey.organizer.fragment.MainFragment;
+
 import com.example.sergey.organizer.fragment.TimePickerFragment;
 import com.example.sergey.organizer.recycler.RecyclerListFragment;
+import com.example.sergey.organizer.util.Util;
 
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
-        implements MainFragment.OnListItemClickListener,
+        implements
         RecyclerListFragment.OnClickListener,
         EditEntryFragment.OnClickListenerEEF,
         CalendarFragment.OnClickListenerCF {
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity
     private static int itemBeckHome;
     private static Config currentConfig;
     private EditEntryFragment eef;
-  //  private RecyclerListFragment rlf;
+
     private ConfigDao configDao = new ConfigDao();
 
     @Override
@@ -50,8 +49,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         wwf = new WorkingWithFiles(this);
-        // wwf.addData();
-        Log.d("tag", "onCreate ");
+         //wwf.addData();
+
         if (savedInstanceState != null) {
             int i = savedInstanceState.getInt("currentConfig");
             currentConfig = findConfig(i);
@@ -72,17 +71,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void startConfig(Config config) {
-        Log.d("TAG", "startConfig  " + config.getId());
         currentConfig = config;
         Map<Integer, String> paramsMenu = config.getParamsMenu();
         Constants.ITEM_SORT = (paramsMenu.containsKey(Constants.ACTION_ITEM_SORT));
         Constants.ITEM_DELETE = (paramsMenu.containsKey(Constants.ACTION_ITEM_DELETE));
         itemBeckHome = config.getActionHomeItem();
         startFragment(config.getFragment());
-        createConfigMenu(config);
+        makeChangesMenu(config);
     }
 
-    private void createConfigMenu(Config config) {
+    private void makeChangesMenu(Config config) {
         List<ChooseMenu> allItemMenu = configDao.getItemMenu();
         Map<Integer, String> paramsMenu = config.getParamsMenu();
         getSupportActionBar().setDisplayHomeAsUpEnabled(config.isItemHome());
@@ -91,7 +89,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (getMenu != null) {
-            Log.d("tag", "createConfigMenu: " + config.getId() + " itemBeckHome: " + itemBeckHome);
+
             for (ChooseMenu c : allItemMenu) {
                 boolean param = (paramsMenu.containsKey(c.getId()));
                 getMenu.findItem(c.getItemID()).setVisible(param);
@@ -113,7 +111,7 @@ public class MainActivity extends AppCompatActivity
     //position позиция в листе
     @Override
     public void onClickk(int index) {
-        Log.d("tag", "onClick: MainActivity position: " + index + " config: " + currentConfig.getId());
+
         if (!currentConfig.getParamsMenu().containsKey(Constants.ACTION_CONNOT_CLICK)) {
             return;
         }
@@ -137,9 +135,9 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
+  /*  @Override
     public void onListItemClick(int position) {
-    }
+    }*/
 
     @Override
     public void onBackPressed() {
@@ -174,7 +172,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        Log.d("tag", "onCreateOptionsMenu");
+
         getMenu = menu;
         startConfig(currentConfig);
         return super.onCreateOptionsMenu(menu);
