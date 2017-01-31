@@ -23,9 +23,9 @@ public class Controller {
     public Controller() {
     }
 
-    public List<Event> getList() {
-        return wwf.readFile();
-    }
+   // public List<Event> getList() {
+//        return wwf.readFile();
+//    }
 
 
     public List<Event> getSortedList() {

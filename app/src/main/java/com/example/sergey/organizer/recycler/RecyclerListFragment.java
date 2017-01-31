@@ -59,8 +59,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         //убираю клавиатуру
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        //TODO
-        // eventList = contr.getSortedList();
+
         eventList = contr.getSortedList();
         dateFilter = 0;
         if (getArguments() != null) {

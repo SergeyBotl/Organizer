@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +19,6 @@ import com.example.sergey.organizer.entity.ChooseMenu;
 import com.example.sergey.organizer.entity.Config;
 import com.example.sergey.organizer.fragment.DatePickerFragment;
 import com.example.sergey.organizer.fragment.EditEntryFragment;
-
 import com.example.sergey.organizer.fragment.TimePickerFragment;
 import com.example.sergey.organizer.recycler.RecyclerListFragment;
 import com.example.sergey.organizer.util.Util;
@@ -55,7 +53,7 @@ public class MainActivity extends AppCompatActivity
             int i = savedInstanceState.getInt("currentConfig");
             currentConfig = findConfig(i);
         } else {
-            currentConfig = findConfig(0);
+            currentConfig = findConfig(Constants.CONFIG_CALENDAR);
         }
     }
 
@@ -115,7 +113,7 @@ public class MainActivity extends AppCompatActivity
         if (!currentConfig.getParamsMenu().containsKey(Constants.ACTION_CONNOT_CLICK)) {
             return;
         }
-        currentConfig = findConfig(6);
+        currentConfig = findConfig(Constants.CONFIG_EDIT_EVENT);
         eef = EditEntryFragment.newInstance(index, cont.getSortedList());
         currentConfig.setFragment(eef);
         startConfig(currentConfig);
@@ -145,7 +143,7 @@ public class MainActivity extends AppCompatActivity
         if (currentConfig.getId() != 0) {
             startConfig(findConfig(itemBeckHome));
         } else {
-            startConfig(findConfig(0));
+            startConfig(findConfig(Constants.CONFIG_CALENDAR));
             new MaterialDialog.Builder(this)
                     .title(R.string.title_close_app)
                     .positiveText(R.string.item_ok)
@@ -208,33 +206,33 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_calendar:
-                startConfig(findConfig(0));
+                startConfig(findConfig(Constants.CONFIG_CALENDAR));
                 break;
             case R.id.action_sort:
-                startConfig(findConfig(3));
+                startConfig(findConfig(Constants.CONFIG_SORT));
                 break;
             case R.id.action_delete:
-                startConfig(findConfig(5));
+                startConfig(findConfig(Constants.CONFIG_DELETE));
                 break;
             case R.id.action_new_event:
-                currentConfig = findConfig(8);
+                currentConfig = findConfig(Constants.CONFIG_NEW_EWENT);
                 currentConfig.setFragment(new EditEntryFragment());
                 startConfig(currentConfig);
                 break;
             case R.id.action_events_list:
                 Constants.ITEM_EVENT_DONE_CHECK = true;
-                createListByFilter(0, 1, 0);
+                createListByFilter(0, Constants.CONFIG_LIST, 0);
                 return true;
             case android.R.id.home:
                 onBackPressed();
                 return true;
             case R.id.action_done:
-                createListByFilter(getRlfDateFilter(), 1, 0);
+                createListByFilter(getRlfDateFilter(), Constants.CONFIG_LIST, 0);
                 break;
             case R.id.action_save_event:
                 eef = (EditEntryFragment) currentConfig.getFragment();
                 eef.saveEvent();
-                startConfig(findConfig(1));
+                startConfig(findConfig(Constants.CONFIG_LIST));
                 getSupportActionBar().setTitle(Util.getDateDMY(getRlfDateFilter()));
                 return true;
             case R.id.action_edit_sort_delete:
@@ -256,11 +254,11 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private Fragment getLastFragment() {
+   /* private Fragment getLastFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         return fragmentManager.findFragmentById(R.id.content);
-     /* FragmentManager fm = getSupportFragmentManager();
+     *//* FragmentManager fm = getSupportFragmentManager();
         List<Fragment> fragments = fm.getFragments();
-        return fragments.get(fragments.size() - 1);*/
-    }
+        return fragments.get(fragments.size() - 1);*//*
+    }*/
 }

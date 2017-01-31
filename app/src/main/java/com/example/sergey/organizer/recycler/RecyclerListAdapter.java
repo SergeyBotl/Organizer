@@ -161,7 +161,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         final TextView textViewDate;
         // final TextView textViewTime;
         final ImageView handleView;
-        final ImageView handleViewDel;
+       // final ImageView handleViewDel;
 
         ItemViewHolder(View itemView) {
             super(itemView);
@@ -172,7 +172,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             textViewDate = (TextView) itemView.findViewById(R.id.textDate);
             // textViewTime = (TextView) itemView.findViewById(R.id.textTime);
             handleView = (ImageView) itemView.findViewById(R.id.handle);
-            handleViewDel = (ImageView) itemView.findViewById(R.id.handle_del);
+           // handleViewDel = (ImageView) itemView.findViewById(R.id.handle_del);
             if (Constants.ITEM_SORT || Constants.ITEM_DELETE) {
                // chBox.setVisibility(View.VISIBLE);
                 handleView.setVisibility(View.VISIBLE);
