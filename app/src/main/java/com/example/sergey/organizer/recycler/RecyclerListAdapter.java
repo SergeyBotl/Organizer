@@ -80,7 +80,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         }
 
         date = event.getDate() == 0 ? "" : Util.getEEDayMonth(event.getDate());
-        time = event.getTime() == 0 ? "" : "" + Util.getTime(event.getTime());
+        time = event.getTime() == 0 ? "" : ", " + Util.getTime(event.getTime());
 
         holder.textViewDate.setText(date + " " + time);
         holder.chBox.setChecked(event.isCheckDone());
