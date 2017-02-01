@@ -225,7 +225,7 @@ public class EditEntryFragment extends Fragment {
 
     public void setAlarm(long timeMillis) {
         Intent intent = createIntent(String.valueOf(timeMillis), event.getMsgEvent(), sdfTime.format(new Date(timeMillis)));
-        PendingIntent pIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
+        PendingIntent pIntent = PendingIntent.getBroadcast(getActivity(), 0, intent,0);
          am.set(AlarmManager.RTC_WAKEUP, timeMillis, pIntent);
 
     }

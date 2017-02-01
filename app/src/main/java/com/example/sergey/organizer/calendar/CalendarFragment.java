@@ -50,9 +50,13 @@ public class CalendarFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH, (int) customAdapter.getItemId(i));
-                ((MainActivity) getActivity()).createListByFilter(calendar.getTimeInMillis(), 1, 0);
+               int day= (int) customAdapter.getItemId(i);
+                if (day>0){
+                    calendar.set(Calendar.MONTH, month);
+                    calendar.set(Calendar.DAY_OF_MONTH, day);
+                    ((MainActivity) getActivity()).createListByFilter(calendar.getTimeInMillis(), 1, 0);
+                }
+
             }
         });
         return view;

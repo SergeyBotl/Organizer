@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -38,16 +39,16 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     private Context context;
     private String time, date;
 
-    private Controller cont = new Controller();
+    private Controller contr = new Controller();
     private final OnStartDragListener mDragStartListener;
     private RecyclerListFragment.OnClickListener mOnClickListener;
     private String dateFilter;
 
     public RecyclerListAdapter(Context context, OnStartDragListener dragStartListener
-            , RecyclerListFragment.OnClickListener mOnClickListener, List<Event> mItems, String dateFilter) {//,
+            , RecyclerListFragment.OnClickListener mOnClickListener, String dateFilter) {//, List<Event> mItems,
         mDragStartListener = dragStartListener;
         this.context = context;
-        this.mItems = mItems;
+        this.mItems =contr.getSortedList(); //mItems;
         this.mOnClickListener = mOnClickListener;
         this.dateFilter = dateFilter;
 
@@ -55,6 +56,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Log.d("tag",""+viewType);
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, parent, false);
         return new ItemViewHolder(view);
     }
@@ -96,7 +98,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
                     event.setCheckDone(false);
                     holder.textMsg.setPaintFlags(0);
                 }
-                cont.updateItemEvent(event, position);
+                contr.updateItemEvent(event, position);
        }
 
         });
@@ -137,14 +139,14 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     public void onItemDismiss(int position) {
         mItems.remove(position);
         notifyItemRemoved(position);
-        cont.saveList(mItems);
+        contr.saveList(mItems);
     }
 
     @Override //перемещение
     public boolean onItemMove(int fromPosition, int toPosition) {
         Collections.swap(mItems, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
-        cont.saveList(mItems);
+        contr.saveList(mItems);
         return true;
     }
 

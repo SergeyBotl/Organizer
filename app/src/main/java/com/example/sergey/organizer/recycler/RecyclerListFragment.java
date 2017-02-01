@@ -60,14 +60,14 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-        eventList = contr.getSortedList();
+       // eventList = contr.getSortedList();
         dateFilter = 0;
         if (getArguments() != null) {
             dateFilter = getArguments().getLong("dateFilter", 0);
         }
         RecyclerView recyclerView = (RecyclerView) view;
         //Log.d("tag", "onViewCreated  getArguments() " + eventList.toString());
-        RecyclerListAdapter adapter = new RecyclerListAdapter(getActivity(), this, mOnClickListener, eventList, Util.getDateDMY(dateFilter));
+        RecyclerListAdapter adapter = new RecyclerListAdapter(getActivity(), this, mOnClickListener,  Util.getDateDMY(dateFilter));
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
