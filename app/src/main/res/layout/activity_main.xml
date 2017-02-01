@@ -24,4 +24,27 @@
 
     </FrameLayout>
 
+
+   <!-- <LinearLayout
+        android:id="@+id/linearLayoutBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <EditText
+            android:id="@+id/editTextBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"/>
+
+        <ImageButton
+            android:id="@+id/imageButtonEntry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_input_add"/>
+
+
+    </LinearLayout>
+-->
 </LinearLayout>

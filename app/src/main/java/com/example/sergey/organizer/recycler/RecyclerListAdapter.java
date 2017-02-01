@@ -87,8 +87,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         holder.textViewDate.setText(date + " " + time);
         holder.chBox.setChecked(event.isCheckDone());
 
-        final View checkB = holder.chBox;
-        checkB.setOnClickListener(new View.OnClickListener() {
+         holder.chBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (holder.chBox.isChecked()) {
@@ -184,21 +183,16 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
         @Override
         public void onItemSelected() {
-            //изменяет цвет на серый
+
             itemView.setBackgroundColor(Color.LTGRAY);
         }
 
         @Override
         public void onItemClear() {
-            // изменяет цвет на белый
+            
             itemView.setBackgroundColor(0);
         }
     }
 
-    static class ViewHeader extends RecyclerView.ViewHolder {
 
-        public ViewHeader(View itemView) {
-            super(itemView);
-        }
-    }
 }

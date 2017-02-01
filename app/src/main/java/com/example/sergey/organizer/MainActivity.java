@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
             int i = savedInstanceState.getInt("currentConfig");
             currentConfig = findConfig(i);
         } else {
-            currentConfig = findConfig(Constants.CONFIG_CALENDAR);
+            currentConfig = findConfig(Constants.CONFIG_CALENDAR );
         }
     }
 

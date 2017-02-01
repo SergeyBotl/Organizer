@@ -14,10 +14,10 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
 import com.example.sergey.organizer.Controller;
-import com.example.sergey.organizer.util.Util;
 import com.example.sergey.organizer.entity.Event;
 import com.example.sergey.organizer.helper.OnStartDragListener;
 import com.example.sergey.organizer.helper.SimpleItemTouchHelperCallback;
+import com.example.sergey.organizer.util.Util;
 
 import java.util.List;
 
@@ -50,6 +50,8 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mOnClickListener = (OnClickListener) getActivity();
+        //View view =inflater.inflate(R.layout.fragment_recycler_list,container,false);
+        //return view;
         return new RecyclerView(container.getContext());
     }
 
@@ -65,7 +67,9 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         if (getArguments() != null) {
             dateFilter = getArguments().getLong("dateFilter", 0);
         }
-        RecyclerView recyclerView = (RecyclerView) view;
+       RecyclerView recyclerView = (RecyclerView) view;
+      // RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewContainer);
+
         //Log.d("tag", "onViewCreated  getArguments() " + eventList.toString());
         RecyclerListAdapter adapter = new RecyclerListAdapter(getActivity(), this, mOnClickListener,  Util.getDateDMY(dateFilter));
 
