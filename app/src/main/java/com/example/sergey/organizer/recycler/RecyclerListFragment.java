@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -11,9 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import com.example.sergey.organizer.Controller;
+import com.example.sergey.organizer.R;
 import com.example.sergey.organizer.entity.Event;
 import com.example.sergey.organizer.helper.OnStartDragListener;
 import com.example.sergey.organizer.helper.SimpleItemTouchHelperCallback;
@@ -50,9 +53,10 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mOnClickListener = (OnClickListener) getActivity();
-        //View view =inflater.inflate(R.layout.fragment_recycler_list,container,false);
-        //return view;
-        return new RecyclerView(container.getContext());
+        View view =inflater.inflate(R.layout.fragment_recycler_list,container,false);
+
+        return view;
+//         return new RecyclerView(container.getContext());
     }
 
     @Override
@@ -61,14 +65,14 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         //убираю клавиатуру
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
        // eventList = contr.getSortedList();
         dateFilter = 0;
         if (getArguments() != null) {
             dateFilter = getArguments().getLong("dateFilter", 0);
         }
-       RecyclerView recyclerView = (RecyclerView) view;
-      // RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewContainer);
+      // RecyclerView recyclerView = (RecyclerView) view;
+       RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewContainer);
 
         //Log.d("tag", "onViewCreated  getArguments() " + eventList.toString());
         RecyclerListAdapter adapter = new RecyclerListAdapter(getActivity(), this, mOnClickListener,  Util.getDateDMY(dateFilter));
@@ -80,6 +84,18 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(recyclerView);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (getActivity() instanceof AppCompatActivity) {
+            AppCompatActivity activity = ((AppCompatActivity) getActivity());
+            if (activity.getSupportActionBar() != null)
+
+                activity.getSupportActionBar().setTitle("hgjhgjhgj");
+        }
     }
 
     @Override

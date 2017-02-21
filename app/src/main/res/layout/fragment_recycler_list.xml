@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/recyclerViewContainer"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentTop="true">
+    android:orientation="vertical">
 
-</android.support.v7.widget.RecyclerView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_weight="6">
 
-
-    <!--  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-          android:layout_weight="1">
-
+    </android.support.v7.widget.RecyclerView>
 
 
-          <ImageButton
-              android:id="@+id/imageButtonEntry"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:src="@android:drawable/ic_input_add"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recyclerViewContainer"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/editTextBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"/>
+
+        <ImageButton
+            android:id="@+id/imageButtonEntry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_input_add" />
 
 
-
-  </LinearLayout>-->
-</RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

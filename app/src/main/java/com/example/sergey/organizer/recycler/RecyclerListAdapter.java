@@ -189,7 +189,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
         @Override
         public void onItemClear() {
-            
+
             itemView.setBackgroundColor(0);
         }
     }
