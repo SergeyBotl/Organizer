@@ -39,16 +39,16 @@ public class WorkingWithFiles {
         long date = new Date().getTime();
         long time = new Date().getTime();
 
-        list.add(new Event( "Работа над книгой",date,time,false));
-        list.add(new Event( "Повесить давно купленную картину",date,time,false));
-        list.add(new Event( "Позвонить старому приятелю",date,time,false));
-        list.add(new Event( "Работа над книгой.",date,time,false));
-        list.add(new Event( "Конференция NAPO",date,time,false));
-        list.add(new Event( "Подготовка к съезду IMRA Пресс-релиз",date,time,false));
-        list.add(new Event( "Рейс 1610 вылет в нешвиль",date,time,false));
-        list.add(new Event( "Сезд IMRA в Нешвиле",date,time,false));
-        list.add(new Event( "Работа над книгой",date,time,false));
-        list.add(new Event( "Письмо с благодарностью: Линда",date,time,false));
+        list.add(new Event("Работа над книгой", date, time, false));
+        list.add(new Event("Повесить давно купленную картину", date, time, false));
+        list.add(new Event("Позвонить старому приятелю", date, time, false));
+        list.add(new Event("Работа над книгой.", date, time, false));
+        list.add(new Event("Конференция NAPO", date, time, false));
+        list.add(new Event("Подготовка к съезду IMRA Пресс-релиз", date, time, false));
+        list.add(new Event("Рейс 1610 вылет в нешвиль", date, time, false));
+        list.add(new Event("Сезд IMRA в Нешвиле", date, time, false));
+        list.add(new Event("Работа над книгой", date, time, false));
+        list.add(new Event("Письмо с благодарностью: Линда", date, time, false));
 
     }
 
@@ -62,7 +62,7 @@ public class WorkingWithFiles {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
             for (Event e : list) {
-               // Log.d(TAG, e.toString());
+                // Log.d(TAG, e.toString());
                 oos.writeObject(e);
             }
 
@@ -81,11 +81,14 @@ public class WorkingWithFiles {
         try {
             FileInputStream fis = new FileInputStream(filePathDir);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            Event event = (Event) ois.readObject();
-            while (event != null) {
-                list.add(event);
-                event = (Event) ois.readObject();
-                // Log.d(TAG, event.toString());
+
+            if (ois != null) {
+                Event event = (Event) ois.readObject();
+                while (event != null) {
+                    list.add(event);
+                    event = (Event) ois.readObject();
+                    // Log.d(TAG, event.toString());
+                }
             }
         } catch (FileNotFoundException | ClassNotFoundException e) {
             e.printStackTrace();

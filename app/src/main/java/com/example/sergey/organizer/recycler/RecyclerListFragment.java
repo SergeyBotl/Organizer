@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.sergey.organizer.Controller;
 import com.example.sergey.organizer.R;
@@ -30,7 +32,9 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
     private Controller contr = new Controller();
     private List<Event> eventList;
     private long dateFilter;
-
+    private EditText textAddEvent;
+    private ImageView ivSengEvent;
+    private RecyclerListAdapter adapter;
     public RecyclerListFragment() {
     }
 
@@ -53,7 +57,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mOnClickListener = (OnClickListener) getActivity();
-        View view =inflater.inflate(R.layout.fragment_recycler_list,container,false);
+        View view = inflater.inflate(R.layout.fragment_recycler_list, container, false);
 
         return view;
 //         return new RecyclerView(container.getContext());
@@ -66,16 +70,18 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-       // eventList = contr.getSortedList();
+        // eventList = contr.getSortedList();
+        ivSengEvent = (ImageView) view.findViewById(R.id.imageButtonEntryNewEvent);
+        textAddEvent = (EditText) view.findViewById(R.id.editTextAddEvent);
         dateFilter = 0;
         if (getArguments() != null) {
             dateFilter = getArguments().getLong("dateFilter", 0);
         }
-      // RecyclerView recyclerView = (RecyclerView) view;
-       RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewContainer);
+        // RecyclerView recyclerView = (RecyclerView) view;
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewContainer);
 
         //Log.d("tag", "onViewCreated  getArguments() " + eventList.toString());
-        RecyclerListAdapter adapter = new RecyclerListAdapter(getActivity(), this, mOnClickListener,  Util.getDateDMY(dateFilter));
+        adapter = new RecyclerListAdapter(getActivity(), this, mOnClickListener, Util.getDateDMY(dateFilter));
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
@@ -84,7 +90,22 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(recyclerView);
+       ivSengEvent.setOnClickListener(onClickListener);
     }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (textAddEvent.getText().length()>0){
+               // contr.saveNewEvent(new Event(0, textAddEvent.getText().toString()));
+
+                adapter.addNewAventToAdapter(new Event(0, textAddEvent.getText().toString()));
+                textAddEvent.setText("");
+                adapter.notifyDataSetChanged();
+            }
+
+        }
+    };
 
     @Override
     public void onResume() {
@@ -97,6 +118,8 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
                 activity.getSupportActionBar().setTitle("hgjhgjhgj");
         }
     }
+
+
 
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {

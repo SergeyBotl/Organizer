@@ -134,6 +134,12 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
     }
 
+    public void addNewAventToAdapter(Event event){
+        mItems.add(event);
+        this.notifyDataSetChanged();
+        contr.saveList(mItems);
+    }
+
     @Override//удаление
     public void onItemDismiss(int position) {
         mItems.remove(position);
