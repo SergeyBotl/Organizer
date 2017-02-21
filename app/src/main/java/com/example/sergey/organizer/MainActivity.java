@@ -75,10 +75,10 @@ public class MainActivity extends AppCompatActivity
         Constants.ITEM_DELETE = (paramsMenu.containsKey(Constants.ACTION_ITEM_DELETE));
         itemBeckHome = config.getActionHomeItem();
         startFragment(config.getFragment());
-        makeChangesMenu(config);
+        changesMenu(config);
     }
 
-    private void makeChangesMenu(Config config) {
+    private void changesMenu(Config config) {
         List<ChooseMenu> allItemMenu = configDao.getItemMenu();
         Map<Integer, String> paramsMenu = config.getParamsMenu();
         getSupportActionBar().setDisplayHomeAsUpEnabled(config.isItemHome());
@@ -95,7 +95,23 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void startFragment(Fragment fragment) {
+ /*   public void startFragment(Fragment fragment) {
+        String backStateName = fragment.getClass().getName();
+
+        FragmentManager manager = getSupportFragmentManager();
+        Fragment currentFr = manager.findFragmentById(R.id.content);
+        boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
+        FragmentTransaction ft = manager.beginTransaction();
+        ft.replace(R.id.chains, fragment,"main");
+        if (!fragmentPopped) { //fragment not in back stack, create it.
+            if (currentFr == null || !backStateName.equals(currentFr.getClass().getName())) {
+                ft.addToBackStack(backStateName);
+            }
+        }
+        ft.commit();
+    }*/
+
+     public void startFragment(Fragment fragment) {
         if (fragment != null) {
             fragment.setRetainInstance(true);
             getSupportFragmentManager().beginTransaction()
@@ -137,10 +153,40 @@ public class MainActivity extends AppCompatActivity
     public void onListItemClick(int position) {
     }*/
 
+
+/*    public void onBackPressed() {
+          if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+              new MaterialDialog.Builder(this)
+                      .title(R.string.title_close_app)
+                      .positiveText(R.string.item_ok)
+                      .positiveColor(getResources().getColor(R.color.colorBlue))
+                      .onPositive(new MaterialDialog.SingleButtonCallback() {
+                          @Override
+                          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                              finish();
+                          }
+                      })
+                      .negativeText(R.string.item_no)
+                      .negativeColor(getResources().getColor(R.color.colorBlue))
+                      .onNegative(new MaterialDialog.SingleButtonCallback() {
+                          @Override
+                          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+                          }
+                      })
+                      .show();
+        } else {
+                super.onBackPressed();
+        }
+
+
+    }*/
+
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
         if (currentConfig.getId() != 0) {
+            super.onBackPressed();
             startConfig(findConfig(itemBeckHome));
         } else {
             startConfig(findConfig(Constants.CONFIG_CALENDAR));

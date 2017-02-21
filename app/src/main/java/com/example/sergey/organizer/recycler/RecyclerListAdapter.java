@@ -48,7 +48,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             , RecyclerListFragment.OnClickListener mOnClickListener, String dateFilter) {//, List<Event> mItems,
         mDragStartListener = dragStartListener;
         this.context = context;
-        this.mItems =contr.getSortedList(); //mItems;
+        this.mItems = contr.getSortedList(); //mItems;
         this.mOnClickListener = mOnClickListener;
         this.dateFilter = dateFilter;
 
@@ -56,7 +56,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.d("tag",""+viewType);
+        Log.d("tag", "" + viewType);
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, parent, false);
         return new ItemViewHolder(view);
     }
@@ -77,7 +77,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             return;
         }
 
-        if (event.getDate() == 0) {
+        if (dateFilter == null || event.getDate() == 0) {
             holder.textViewDate.setVisibility(View.GONE);
         }
 
@@ -87,7 +87,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         holder.textViewDate.setText(date + " " + time);
         holder.chBox.setChecked(event.isCheckDone());
 
-         holder.chBox.setOnClickListener(new View.OnClickListener() {
+        holder.chBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (holder.chBox.isChecked()) {
@@ -98,7 +98,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
                     holder.textMsg.setPaintFlags(0);
                 }
                 contr.updateItemEvent(event, position);
-       }
+            }
 
         });
         holder.textMsg.setText(event.getMsgEvent());
@@ -134,7 +134,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
     }
 
-    public void addNewAventToAdapter(Event event){
+    public void addNewAventToAdapter(Event event) {
         mItems.add(event);
         this.notifyDataSetChanged();
         contr.saveList(mItems);
@@ -168,7 +168,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         final TextView textViewDate;
         // final TextView textViewTime;
         final ImageView handleView;
-       // final ImageView handleViewDel;
+        // final ImageView handleViewDel;
 
         ItemViewHolder(View itemView) {
             super(itemView);
@@ -179,9 +179,9 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             textViewDate = (TextView) itemView.findViewById(R.id.textDate);
             // textViewTime = (TextView) itemView.findViewById(R.id.textTime);
             handleView = (ImageView) itemView.findViewById(R.id.handle);
-           // handleViewDel = (ImageView) itemView.findViewById(R.id.handle_del);
+            // handleViewDel = (ImageView) itemView.findViewById(R.id.handle_del);
             if (Constants.ITEM_SORT || Constants.ITEM_DELETE) {
-               // chBox.setVisibility(View.VISIBLE);
+                // chBox.setVisibility(View.VISIBLE);
                 handleView.setVisibility(View.VISIBLE);
             }
 

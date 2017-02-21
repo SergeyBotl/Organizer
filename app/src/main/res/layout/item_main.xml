@@ -34,12 +34,12 @@
             <TextView
                 android:id="@+id/textMsg"
                 android:layout_width="wrap_content"
-                android:layout_height="22dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="9"
                 android:gravity="center_vertical"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
 
             <!--  <ImageView
                   android:id="@+id/handle_del"
@@ -69,7 +69,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="40dp"
             android:paddingRight="5dp"
-            android:textSize="8dp"
+            android:textSize="12dp"
             android:textColor="@color/colorPrimaryDark"/>
         <!-- <TextView
              android:id="@+id/textTime"

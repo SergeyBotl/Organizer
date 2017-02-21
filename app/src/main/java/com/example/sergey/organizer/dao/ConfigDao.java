@@ -36,16 +36,13 @@ public class ConfigDao {
         // SparseBooleanArray paramsMenu = new SparseBooleanArray();
 
         paramsMenu.put(3, "");
-   listConfig.add(new Config(Constants.CONFIG_CALENDAR, "calendar", R.string.title_calendar, new CalendarFragment(), false, paramsMenu, 0));
+        listConfig.add(new Config(Constants.CONFIG_CALENDAR, "calendar", R.string.title_calendar, new CalendarFragment(), false, paramsMenu, 0));
 
         paramsMenu = new HashMap<>();
-
-//        paramsMenu.put(7, "");
         paramsMenu.put(2, "");
         paramsMenu.put(4, "");
 
-       // paramsMenu.put(Constants.MENU_TITLE,"");
-
+        // paramsMenu.put(Constants.MENU_TITLE,"");
         paramsMenu.put(Constants.ACTION_CONNOT_CLICK, "");
         listConfig.add(new Config(Constants.CONFIG_LIST, "list", 0, new RecyclerListFragment(), true, paramsMenu, 0));
 

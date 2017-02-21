@@ -98,8 +98,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         public void onClick(View view) {
             if (textAddEvent.getText().length()>0){
                // contr.saveNewEvent(new Event(0, textAddEvent.getText().toString()));
-
-                adapter.addNewAventToAdapter(new Event(0, textAddEvent.getText().toString()));
+                adapter.addNewAventToAdapter(new Event(dateFilter, textAddEvent.getText().toString()));
                 textAddEvent.setText("");
                 adapter.notifyDataSetChanged();
             }
@@ -110,12 +109,14 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
     @Override
     public void onResume() {
         super.onResume();
-
+          //возможность поменять меню из фрагмента
         if (getActivity() instanceof AppCompatActivity) {
             AppCompatActivity activity = ((AppCompatActivity) getActivity());
-            if (activity.getSupportActionBar() != null)
+            if (activity.getSupportActionBar() != null){
+                // activity.getSupportActionBar().setTitle("hgjhgjhgj");
+            }
 
-                activity.getSupportActionBar().setTitle("hgjhgjhgj");
+
         }
     }
 

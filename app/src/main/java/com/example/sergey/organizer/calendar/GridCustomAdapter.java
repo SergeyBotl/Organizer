@@ -2,7 +2,6 @@ package com.example.sergey.organizer.calendar;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -34,7 +33,6 @@ public class GridCustomAdapter extends BaseAdapter {
         this.context = context;
         this.day = day;
         this.calendar = calendar;
-        Log.d("Tag", "Constructor");
         calendar.setFirstDayOfWeek(Calendar.MONDAY);
         month = calendar.get(Calendar.MONTH);
         year = calendar.get(Calendar.YEAR);

@@ -7,8 +7,6 @@ import com.example.sergey.organizer.dao.WorkingWithFiles;
 import com.example.sergey.organizer.entity.Event;
 
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -31,13 +29,13 @@ public class Controller {
     public List<Event> getSortedList() {
         List<Event> list = wwf.readFile();
 
-        Collections.sort(list, new Comparator<Event>() {
+      /*  Collections.sort(list, new Comparator<Event>() {
             @Override
             public int compare(Event event, Event t1) {
                 return (int) event.getDate() - (int) t1.getDate();
             }
         });
-        wwf.writeFile(list);
+        wwf.writeFile(list);*/
 
         return list;
     }
