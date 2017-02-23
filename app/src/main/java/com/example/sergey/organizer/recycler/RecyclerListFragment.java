@@ -100,7 +100,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
                // contr.saveNewEvent(new Event(0, textAddEvent.getText().toString()));
                 adapter.addNewAventToAdapter(new Event(dateFilter, textAddEvent.getText().toString()));
                 textAddEvent.setText("");
-                adapter.notifyDataSetChanged();
+               // adapter.notifyDataSetChanged();
             }
 
         }

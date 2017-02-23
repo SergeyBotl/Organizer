@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.sergey.organizer.calendar.CalendarFragment;
-import com.example.sergey.organizer.constants.Constants;
+import com.example.sergey.organizer.constants.Const;
 import com.example.sergey.organizer.dao.ConfigDao;
 import com.example.sergey.organizer.dao.WorkingWithFiles;
 import com.example.sergey.organizer.entity.ChooseMenu;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
             int i = savedInstanceState.getInt("currentConfig");
             currentConfig = findConfig(i);
         } else {
-            currentConfig = findConfig(Constants.CONFIG_CALENDAR );
+            currentConfig = findConfig(Const.CONFIG_CALENDAR );
         }
     }
 
@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity
     public void startConfig(Config config) {
         currentConfig = config;
         Map<Integer, String> paramsMenu = config.getParamsMenu();
-        Constants.ITEM_SORT = (paramsMenu.containsKey(Constants.ACTION_ITEM_SORT));
-        Constants.ITEM_DELETE = (paramsMenu.containsKey(Constants.ACTION_ITEM_DELETE));
+        Const.ITEM_SORT = (paramsMenu.containsKey(Const.ACTION_ITEM_SORT));
+        Const.ITEM_DELETE = (paramsMenu.containsKey(Const.ACTION_ITEM_DELETE));
         itemBeckHome = config.getActionHomeItem();
         startFragment(config.getFragment());
         changesMenu(config);
@@ -126,10 +126,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClickk(int index) {
 
-        if (!currentConfig.getParamsMenu().containsKey(Constants.ACTION_CONNOT_CLICK)) {
+        if (!currentConfig.getParamsMenu().containsKey(Const.ACTION_CONNOT_CLICK)) {
             return;
         }
-        currentConfig = findConfig(Constants.CONFIG_EDIT_EVENT);
+        currentConfig = findConfig(Const.CONFIG_EDIT_EVENT);
         eef = EditEntryFragment.newInstance(index, cont.getSortedList());
         currentConfig.setFragment(eef);
         startConfig(currentConfig);
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
             startConfig(findConfig(itemBeckHome));
         } else {
-            startConfig(findConfig(Constants.CONFIG_CALENDAR));
+            startConfig(findConfig(Const.CONFIG_CALENDAR));
             new MaterialDialog.Builder(this)
                     .title(R.string.title_close_app)
                     .positiveText(R.string.item_ok)
@@ -252,33 +252,33 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_calendar:
-                startConfig(findConfig(Constants.CONFIG_CALENDAR));
+                startConfig(findConfig(Const.CONFIG_CALENDAR));
                 break;
             case R.id.action_sort:
-                startConfig(findConfig(Constants.CONFIG_SORT));
+                startConfig(findConfig(Const.CONFIG_SORT));
                 break;
             case R.id.action_delete:
-                startConfig(findConfig(Constants.CONFIG_DELETE));
+                startConfig(findConfig(Const.CONFIG_DELETE));
                 break;
             case R.id.action_new_event:
-                currentConfig = findConfig(Constants.CONFIG_NEW_EWENT);
+                currentConfig = findConfig(Const.CONFIG_NEW_EWENT);
                 currentConfig.setFragment(new EditEntryFragment());
                 startConfig(currentConfig);
                 break;
             case R.id.action_events_list:
-                Constants.ITEM_EVENT_DONE_CHECK = true;
-                createListByFilter(0, Constants.CONFIG_LIST, 0);
+                Const.ITEM_EVENT_DONE_CHECK = true;
+                createListByFilter(0, Const.CONFIG_LIST, 0);
                 return true;
             case android.R.id.home:
                 onBackPressed();
                 return true;
             case R.id.action_done:
-                createListByFilter(getRlfDateFilter(), Constants.CONFIG_LIST, 0);
+                createListByFilter(getRlfDateFilter(), Const.CONFIG_LIST, 0);
                 break;
             case R.id.action_save_event:
                 eef = (EditEntryFragment) currentConfig.getFragment();
                 eef.saveEvent();
-                startConfig(findConfig(Constants.CONFIG_LIST));
+                startConfig(findConfig(Const.CONFIG_LIST));
                 getSupportActionBar().setTitle(Util.getDateDMY(getRlfDateFilter()));
                 return true;
             case R.id.action_edit_sort_delete:

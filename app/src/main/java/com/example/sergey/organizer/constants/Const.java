@@ -1,6 +1,6 @@
 package com.example.sergey.organizer.constants;
 
-public class Constants {
+public class Const {
 
 
 
@@ -22,6 +22,7 @@ public class Constants {
     public static  boolean ITEM_SORT=false;
     public static  boolean ITEM_DELETE=false;
     public static  boolean ITEM_EVENT_DONE_CHECK;
+    public static  boolean END_EVENT=true;
 /*
 
 

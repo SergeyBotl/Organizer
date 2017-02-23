@@ -2,7 +2,7 @@ package com.example.sergey.organizer;
 
 import android.annotation.SuppressLint;
 
-import com.example.sergey.organizer.constants.Constants;
+import com.example.sergey.organizer.constants.Const;
 import com.example.sergey.organizer.dao.WorkingWithFiles;
 import com.example.sergey.organizer.entity.Event;
 
@@ -12,9 +12,9 @@ import java.util.List;
 
 public class Controller {
     @SuppressLint("SimpleDateFormat")
-    SimpleDateFormat sdfD = new SimpleDateFormat(Constants.DATE_D_M_Y);
+    SimpleDateFormat sdfD = new SimpleDateFormat(Const.DATE_D_M_Y);
     @SuppressLint("SimpleDateFormat")
-    SimpleDateFormat sdfT = new SimpleDateFormat(Constants.DATE_H_M);
+    SimpleDateFormat sdfT = new SimpleDateFormat(Const.DATE_H_M);
 
     private WorkingWithFiles wwf = new WorkingWithFiles();
 

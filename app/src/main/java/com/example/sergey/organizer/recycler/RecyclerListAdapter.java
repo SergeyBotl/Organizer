@@ -2,6 +2,7 @@
 package com.example.sergey.organizer.recycler;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v4.view.MotionEventCompat;
@@ -16,9 +17,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.sergey.organizer.Controller;
 import com.example.sergey.organizer.R;
-import com.example.sergey.organizer.constants.Constants;
+import com.example.sergey.organizer.constants.Const;
 import com.example.sergey.organizer.entity.Event;
 import com.example.sergey.organizer.helper.ItemTouchHelperAdapter;
 import com.example.sergey.organizer.helper.ItemTouchHelperViewHolder;
@@ -34,7 +36,9 @@ import java.util.List;
 
 public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.ItemViewHolder>
         implements ItemTouchHelperAdapter {
-    private SimpleDateFormat dmy = new SimpleDateFormat(Constants.DATE_D_M_Y);
+
+    private String TAG = "log_teg";
+    private SimpleDateFormat dmy = new SimpleDateFormat(Const.DATE_D_M_Y);
     private static List<Event> mItems = new ArrayList<>();
     private Context context;
     private String time, date;
@@ -66,15 +70,25 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
         // final Event event = cont.getSortedList().get(position);
         final Event event = mItems.get(position);
 
+        if (event.isCheckDone() && Const.END_EVENT) {
+            holder.itemRel.setVisibility(View.GONE);
+           // return;
+        }
+
+        if (!event.isCheckDone() && !Const.END_EVENT) {
+            holder.itemRel.setVisibility(View.GONE);
+            //return;
+        }
+
         long currentDate = new Date().getTime();
 
         if (dateFilter != null && !dmy.format(new Date(event.getDate())).equals(dateFilter)) {
             holder.itemRel.setVisibility(View.GONE);
-            return;
+            //return;
         }
-        if (!Constants.ITEM_EVENT_DONE_CHECK && event.isCheckDone()) {
+        if (!Const.ITEM_EVENT_DONE_CHECK && event.isCheckDone()) {
             holder.itemRel.setVisibility(View.GONE);
-            return;
+           // return;
         }
 
         if (dateFilter == null || event.getDate() == 0) {
@@ -98,6 +112,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
                     holder.textMsg.setPaintFlags(0);
                 }
                 contr.updateItemEvent(event, position);
+                notifyDataSetChanged();
             }
 
         });
@@ -134,17 +149,59 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
     }
 
-    public void addNewAventToAdapter(Event event) {
-        mItems.add(event);
-        this.notifyDataSetChanged();
-        contr.saveList(mItems);
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
     }
 
-    @Override//удаление
-    public void onItemDismiss(int position) {
-        mItems.remove(position);
-        notifyItemRemoved(position);
+    public void addNewAventToAdapter(Event event) {
+        Log.d(TAG, "addNewAventToAdapter size " + getItemCount());
+        mItems.add(event);
+       this.notifyItemRangeInserted(mItems.size()-1,2);
+       // this.notifyDataSetChanged();
         contr.saveList(mItems);
+    }
+    boolean selected;
+    @Override//удаление
+    public void onItemDismiss(final int position) {
+        selected=false;
+        new MaterialDialog.Builder(context)
+                .items("Удалить", "Завершено")
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int p, CharSequence text) {
+                        Log.d(TAG, "position " + position);
+                        switch (p) {
+                            case 0:
+                                mItems.remove(position);
+                                notifyItemRemoved(position);
+                                contr.saveList(mItems);
+                                break;
+                            case 1:
+                                mItems.get(position).setCheckDone(true);
+                                //holder.chBox.setChecked(event.isCheckDone());
+                                // notifyDataSetChanged();
+                                notifyItemChanged(position);
+                                contr.saveList(mItems);
+                                break;
+
+                        }
+                        selected=true;
+                        Log.d(TAG, "onSelection ");
+                    }
+                }).dismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                Log.d(TAG, "onDismiss ");
+                if (!selected){
+                    notifyItemChanged(position);
+                }
+
+            }
+        })
+                .show();
+
+
     }
 
     @Override //перемещение
@@ -180,7 +237,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             // textViewTime = (TextView) itemView.findViewById(R.id.textTime);
             handleView = (ImageView) itemView.findViewById(R.id.handle);
             // handleViewDel = (ImageView) itemView.findViewById(R.id.handle_del);
-            if (Constants.ITEM_SORT || Constants.ITEM_DELETE) {
+            if (Const.ITEM_SORT || Const.ITEM_DELETE) {
                 // chBox.setVisibility(View.VISIBLE);
                 handleView.setVisibility(View.VISIBLE);
             }
