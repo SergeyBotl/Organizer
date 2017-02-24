@@ -30,6 +30,7 @@ public class ConfigDao {
         itemMenu.add(new ChooseMenu(5, R.id.action_save_event));
         itemMenu.add(new ChooseMenu(6, R.id.action_done));
         itemMenu.add(new ChooseMenu(7, R.id.action_edit_sort_delete));
+        itemMenu.add(new ChooseMenu(8, R.id.action_event_check_done));
 
 
         Map<Integer, String> paramsMenu = new HashMap<>();
@@ -39,7 +40,7 @@ public class ConfigDao {
         listConfig.add(new Config(Const.CONFIG_CALENDAR, "calendar", R.string.title_calendar, new CalendarFragment(), false, paramsMenu, 0));
 
         paramsMenu = new HashMap<>();
-        paramsMenu.put(2, "");
+        paramsMenu.put(8, "");
         paramsMenu.put(4, "");
 
         // paramsMenu.put(Constants.MENU_TITLE,"");

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity
     private static int itemBeckHome;
     private static Config currentConfig;
     private EditEntryFragment eef;
-
+    private long dateFilter;
     private ConfigDao configDao = new ConfigDao();
 
     @Override
@@ -233,6 +233,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void createListByFilter(long dateFilter, int configImdex, int titleMenu) {
+        this.dateFilter=dateFilter;
         RecyclerListFragment rlf = RecyclerListFragment.newInstance(dateFilter);
         if (configImdex > -1) {
             currentConfig = findConfig(configImdex);
@@ -268,6 +269,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_events_list:
                 Const.ITEM_EVENT_DONE_CHECK = true;
                 createListByFilter(0, Const.CONFIG_LIST, 0);
+                RecyclerListFragment.title="Все записи";
                 return true;
             case android.R.id.home:
                 onBackPressed();
@@ -284,6 +286,16 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_edit_sort_delete:
 //                Constants.ITEM_EVENT_DONE_CHECK = true;
 //                createListByFilter(getRlfDateFilter(), 7, 0);
+                break;
+            case R.id.action_event_check_done:
+                if (Const.END_EVENT){
+                    Const.END_EVENT=false;
+                }else{
+                    Const.END_EVENT=true;
+                }
+                createListByFilter(dateFilter,1,0);
+
+              //startFragment(new RecyclerListFragment());
                 break;
             default:
                 break;

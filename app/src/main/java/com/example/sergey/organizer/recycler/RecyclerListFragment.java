@@ -27,14 +27,17 @@ import com.example.sergey.organizer.util.Util;
 import java.util.List;
 
 public class RecyclerListFragment extends Fragment implements OnStartDragListener {
+
+    public static String title;
     private ItemTouchHelper mItemTouchHelper;
     private OnClickListener mOnClickListener;
     private Controller contr = new Controller();
     private List<Event> eventList;
-    private long dateFilter;
+    private static long dateFilter;
     private EditText textAddEvent;
     private ImageView ivSengEvent;
     private RecyclerListAdapter adapter;
+
     public RecyclerListFragment() {
     }
 
@@ -44,6 +47,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         Log.d("tag", "newInstance  " + dateFilter);
         // args.putParcelableArrayList("event", (ArrayList<? extends Parcelable>) event);
         args.putLong("dateFilter", dateFilter);
+
         // args.putInt("index", index);
         rlf.setArguments(args);
         return rlf;
@@ -70,6 +74,7 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         // eventList = contr.getSortedList();
         ivSengEvent = (ImageView) view.findViewById(R.id.imageButtonEntryNewEvent);
         textAddEvent = (EditText) view.findViewById(R.id.editTextAddEvent);
@@ -90,17 +95,17 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(recyclerView);
-       ivSengEvent.setOnClickListener(onClickListener);
+        ivSengEvent.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (textAddEvent.getText().length()>0){
-               // contr.saveNewEvent(new Event(0, textAddEvent.getText().toString()));
+            if (textAddEvent.getText().length() > 0) {
+                // contr.saveNewEvent(new Event(0, textAddEvent.getText().toString()));
                 adapter.addNewAventToAdapter(new Event(dateFilter, textAddEvent.getText().toString()));
                 textAddEvent.setText("");
-               // adapter.notifyDataSetChanged();
+                // adapter.notifyDataSetChanged();
             }
 
         }
@@ -109,18 +114,23 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
     @Override
     public void onResume() {
         super.onResume();
-          //возможность поменять меню из фрагмента
+        //TODO возможность поменять меню из фрагмента
         if (getActivity() instanceof AppCompatActivity) {
             AppCompatActivity activity = ((AppCompatActivity) getActivity());
-            if (activity.getSupportActionBar() != null){
-                // activity.getSupportActionBar().setTitle("hgjhgjhgj");
+            if (activity.getSupportActionBar() != null) {
+                // activity.getSupportActionBar().setTitle(title);
             }
-
-
         }
+
+        updateTitle();
     }
 
-
+    private void updateTitle() {
+        if (dateFilter != 0) {
+            title = Util.getDateDMY(dateFilter);
+        }
+        Util.setUpToolbar(getActivity(), title);
+    }
 
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {

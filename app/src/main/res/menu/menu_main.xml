@@ -26,10 +26,14 @@
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/item_add_event"
         app:showAsAction="ifRoom" />
-
+    <item
+        android:id="@+id/action_event_check_done"
+        android:icon="@drawable/ic_playlist_add_check_white_24dp"
+        android:title="done"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_events_list"
-        android:icon="@android:drawable/ic_menu_agenda"
+        android:icon="@drawable/ic_list_white_24dp"
         android:orderInCategory="100"
         android:title="@string/item_list"
         app:showAsAction="ifRoom" />
@@ -45,8 +49,9 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_calendar"
-        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:icon="@drawable/ic_insert_invitation_white_24dp"
         android:title="@string/title_calendar"
         app:showAsAction="ifRoom" />
+
 
 </menu>
